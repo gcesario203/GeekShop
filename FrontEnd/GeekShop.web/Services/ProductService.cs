@@ -5,8 +5,9 @@ namespace GeekShop.web.Services
 {
     public class ProductService : BaseService<ProductModel>
     {
-        public ProductService(string basePath, HttpClient client) : base(basePath, client)
+        public ProductService(HttpClient client) : base(client)
         {
+            BasePath = "/api/Product";
         }
     }
 }

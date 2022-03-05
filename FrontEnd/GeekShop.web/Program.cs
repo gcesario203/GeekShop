@@ -1,4 +1,6 @@
+using GeekShop.web.Models;
 using GeekShop.web.Services;
+using Library.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

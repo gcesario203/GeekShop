@@ -9,7 +9,7 @@ namespace Library.Utils.Extensions
         public static MediaTypeHeaderValue _contentType = new MediaTypeHeaderValue("application/json");
         public static async Task<T> ReadContentAs<T>(this HttpResponseMessage response)
         {
-            if (response.IsSuccessStatusCode) throw new ApplicationException($"Something goes wrong calling the api: {response.ReasonPhrase}");
+            if (!response.IsSuccessStatusCode) throw new ApplicationException($"Something goes wrong calling the api: {response.ReasonPhrase}");
 
             var dataAsString = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 

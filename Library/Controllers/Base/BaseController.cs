@@ -37,7 +37,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult<V>> Create(V vo)
+        public virtual async Task<ActionResult<V>> Create([FromBody] V vo)
         {
             if (vo == null) return BadRequest();
 
@@ -47,7 +47,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpPut]
-        public virtual async Task<ActionResult<V>> Update(V vo)
+        public virtual async Task<ActionResult<V>> Update([FromBody] V vo)
         {
             if (vo == null) return BadRequest();
 

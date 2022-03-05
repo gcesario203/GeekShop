@@ -6,11 +6,10 @@ namespace Library.Services.Base
     public class BaseService<T> : IService<T>
     {
         private readonly HttpClient _client;
-        public string BasePath { get; private set; }
+        public string BasePath { get; protected set; }
 
-        public BaseService(string basePath, HttpClient client)
+        public BaseService(HttpClient client)
         {
-            BasePath = basePath;
             _client =client ?? throw new ArgumentNullException($"Something goes creating a HTTP service for: {BasePath}");
         }
         public virtual async Task<IEnumerable<T>> FindAll()
