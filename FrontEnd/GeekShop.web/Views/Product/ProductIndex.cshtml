@@ -1,1 +1,73 @@
-﻿<p>Bora caralho.</p>
+﻿@using System.Globalization
+@model IEnumerable<ProductModel>
+
+<br />
+<br />
+
+<div class="containter fluid p-4 border">
+    <div class="row align-center">
+        <div class="col">
+            <h1 class="text-primary">
+                Products List
+            </h1>
+        </div>
+        <div class="col text-end">
+            <a asp-action="ProductCreate" class="btn btn-outline-primary">
+                <span>Create</span>
+            </a>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Category
+                </th>
+                <th>
+                    Price
+                </th>
+                <th class="text-center">
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.CategoryName
+                    </td>
+                    <td>
+                        @item.Price.ToString("C2", CultureInfo.CurrentCulture)
+                    </td>
+                    <td>
+                        <div class="row text-center">
+                            <div class="col px-0">
+                                <a asp-action="ProductEdit" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-outline-success">
+                                    <span>
+                                        Edit Item
+                                    </span>
+                                </a>
+                            </div>
+                            <div class="col px-0">
+                                <a asp-action="ProductDelete" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-outline-danger">
+                                    <span>
+                                        Delete Item
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

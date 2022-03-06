@@ -48,7 +48,7 @@ namespace Library.Services.Base
 
         public virtual async Task<bool> Delete(long id)
         {
-            var response = await _client.GetAsync($"{BasePath}/{id}");
+            var response = await _client.DeleteAsync($"{BasePath}/{id}");
 
             if(!response.IsSuccessStatusCode)
                 new Exception($"Something goes wrong deleting on: {BasePath}");
