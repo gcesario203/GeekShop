@@ -3,6 +3,8 @@ using Library.Controllers.Interfaces;
 using Library.Repositories.Base;
 using Library.Models;
 using Library.Contexts;
+using Microsoft.AspNetCore.Authorization;
+using Library.Utils.Generals;
 
 namespace Library.Controllers.Base
 {
@@ -19,6 +21,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpGet]
+        [Authorize]
         public virtual async Task<ActionResult<IEnumerable<V>>> FindAll()
         {
             var products = await _repository.FindAll();
@@ -27,6 +30,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public virtual async Task<ActionResult<V>> FindById(long id)
         {
             var product = await _repository.FindById(id);
@@ -37,6 +41,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpPost]
+        [Authorize]
         public virtual async Task<ActionResult<V>> Create([FromBody] V vo)
         {
             if (vo == null) return BadRequest();
@@ -47,6 +52,7 @@ namespace Library.Controllers.Base
         }
 
         [HttpPut]
+        [Authorize]
         public virtual async Task<ActionResult<V>> Update([FromBody] V vo)
         {
             if (vo == null) return BadRequest();
@@ -57,11 +63,12 @@ namespace Library.Controllers.Base
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = Role.Admin)]
         public virtual async Task<ActionResult> Delete(long id)
         {
-            var status =  await _repository.Delete(id);
+            var status = await _repository.Delete(id);
 
-            if(!status) return BadRequest();
+            if (!status) return BadRequest();
 
             return Ok(status);
         }
