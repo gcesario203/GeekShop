@@ -49,7 +49,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+app.UseCookiePolicy(new CookiePolicyOptions { MinimumSameSitePolicy = SameSiteMode.Lax });
+
+// app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();

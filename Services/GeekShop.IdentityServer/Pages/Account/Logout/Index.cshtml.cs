@@ -2,9 +2,11 @@ using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
+using GeekShop.IdentityServer.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -14,16 +16,26 @@ namespace GeekShop.IdentityServer.Pages.Logout;
 [AllowAnonymous]
 public class Index : PageModel
 {
+    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly SignInManager<ApplicationUser> _sigInManager;
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IIdentityServerInteractionService _interaction;
     private readonly IEventService _events;
 
-    [BindProperty] 
+    [BindProperty]
     public string LogoutId { get; set; }
 
-    public Index(IIdentityServerInteractionService interaction, IEventService events)
+    public Index(IIdentityServerInteractionService interaction,
+                 IEventService events,
+                 UserManager<ApplicationUser> userManager,
+                 SignInManager<ApplicationUser> sigInManager,
+                 RoleManager<IdentityRole> roleManager)
     {
         _interaction = interaction;
         _events = events;
+        _userManager = userManager;
+        _sigInManager = sigInManager;
+        _roleManager = roleManager;
     }
 
     public async Task<IActionResult> OnGet(string logoutId)
@@ -46,7 +58,7 @@ public class Index : PageModel
                 showLogoutPrompt = false;
             }
         }
-            
+
         if (showLogoutPrompt == false)
         {
             // if the request for logout was properly authenticated from IdentityServer, then
@@ -65,9 +77,9 @@ public class Index : PageModel
             // this captures necessary info from the current logged in user
             // this can still return null if there is no context needed
             LogoutId ??= await _interaction.CreateLogoutContextAsync();
-                
+
             // delete local authentication cookie
-            await HttpContext.SignOutAsync();
+            await _sigInManager.SignOutAsync();
 
             // raise the logout event
             await _events.RaiseAsync(new UserLogoutSuccessEvent(User.GetSubjectId(), User.GetDisplayName()));

@@ -52,7 +52,7 @@ namespace GeekShop.IdentityServer.Configurations
                         "http://localhost:5080/signin-oidc"
                     },
                     PostLogoutRedirectUris = {
-                        "http://localhost:5080/signou-callback-oidc"
+                        "http://localhost:5080/signout-callback-oidc"
                     },
                     AllowedScopes = new List<string>{
                         IdentityServerConstants.StandardScopes.OpenId,
