@@ -66,11 +66,13 @@ public class Index : PageModel
             return await OnPost();
         }
 
-        return Page();
+        return await OnPost();
     }
 
     public async Task<IActionResult> OnPost()
     {
+        var context = await _interaction.GetLogoutContextAsync(LogoutId);
+
         if (User?.Identity.IsAuthenticated == true)
         {
             // if there's no current logout context, we need to create one
@@ -96,14 +98,17 @@ public class Index : PageModel
                     // build a return URL so the upstream provider will redirect back
                     // to us after the user has logged out. this allows us to then
                     // complete our single sign-out processing.
-                    string url = Url.Page("/Account/Logout/Loggedout", new { logoutId = LogoutId });
+                    // string url = Url.Page(context.PostLogoutRedirectUri ?? "/Account/Logout/Loggedout", new { logoutId = LogoutId });
+                    string url = Url.Page(context.PostLogoutRedirectUri ?? "~/Account/Logout/Loggedout", new { logoutId = LogoutId });
 
                     // this triggers a redirect to the external provider for sign-out
+                    // return SignOut(new AuthenticationProperties { RedirectUri = url }, idp);
                     return SignOut(new AuthenticationProperties { RedirectUri = url }, idp);
                 }
             }
         }
 
-        return RedirectToPage("/Account/Logout/LoggedOut", new { logoutId = LogoutId });
+        // return RedirectToPage(context.PostLogoutRedirectUri ?? "/Account/Logout/LoggedOut", new { logoutId = LogoutId });
+        return Redirect(context.PostLogoutRedirectUri ?? "~/Account/Logout/LoggedOut");
     }
 }
