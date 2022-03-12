@@ -1,0 +1,54 @@
+@page
+@model GeekShop.IdentityServer.Pages.Account.Register.Index
+
+<div class="login-page">
+    <div class="lead">
+        <h1>Register</h1>
+        <span>Choose how to register</span>
+    </div>
+    <partial name="_ValidationSummary" />
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card-header">
+                <h2>Local account register</h2>
+            </div>
+
+            <div class="card-body">
+                <form asp-page="/Account/Register/Index">
+                    <input type="hidden" asp-for="Input.ReturnUrl" />
+
+                    <div class="form-group">
+                        <label asp-for="Input.UserName"></label>
+                        <input asp-for="Input.UserName" placeholder="username" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Email"></label>
+                        <input asp-for="Input.Email" placeholder="email" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.FirstName"></label>
+                        <input asp-for="Input.FirstName" placeholder="FirstName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.LastName"></label>
+                        <input asp-for="Input.LastName" placeholder="LastName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Password"></label>
+                        <input type="password" asp-for="Input.Password" placeholder="Password" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.RoleName"></label>
+                        <select asp-for="Input.RoleName" placeholder="roleName" class="form-control">
+                            <option value="Admin">Admin</option>
+                            <option value="Client">Client</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" name="Input.Button" value="register">Register</button>
+                    <button class="btn btn-secondary" name="Input.Button" value="login">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

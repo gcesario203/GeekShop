@@ -76,8 +76,13 @@ public class Index : PageModel
         // check if we are in the context of an authorization request
         var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
 
+        if(Input.Button == "register")
+        {
+            return RedirectToPage("/Account/Register/Index", new { Input.ReturnUrl });
+        }
+
         // the user clicked the "cancel" button
-        if (Input.Button != "login")
+        if (Input.Button == "cancel")
         {
             if (context != null)
             {
@@ -91,10 +96,10 @@ public class Index : PageModel
                 {
                     // The client is native, so this change in how to
                     // return the response is for better UX for the end user.
-                    return this.LoadingPage(Input.ReturnUrl);
+                    return this.LoadingPage("http://localhost:5080");
                 }
 
-                return Redirect(Input.ReturnUrl);
+                return Redirect("http://localhost:5080");
             }
             else
             {
