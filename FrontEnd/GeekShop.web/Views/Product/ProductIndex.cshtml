@@ -56,13 +56,16 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="col px-0">
+                            @if(User.IsInRole("Admin"))
+                            {
+                                                            <div class="col px-0">
                                 <a asp-action="ProductDelete" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-outline-danger">
                                     <span>
                                         Delete Item
                                     </span>
                                 </a>
                             </div>
+                            }
                         </div>
                     </td>
                 </tr>
