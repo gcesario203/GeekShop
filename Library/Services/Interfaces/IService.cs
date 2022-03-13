@@ -4,9 +4,9 @@ namespace Library.Services.Interfaces
     {
          Task<IEnumerable<T>> FindAll();
 
-         Task<T> FindById(long id);
+         Task<T> FindById(long id );
 
-         Task<T> Create(T model);
+         Task<T> Create(T model );
 
          Task<T> Update(T model);
 

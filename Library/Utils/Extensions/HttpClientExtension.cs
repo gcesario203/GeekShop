@@ -20,7 +20,6 @@ namespace Library.Utils.Extensions
                 PropertyNameCaseInsensitive = true
             });
         }
-
         public static Task<HttpResponseMessage> PostAsJson<T>(this HttpClient httpClient, string url, T data)
         {
             return httpClient.PostAsync(url, General.BuildJsonRequestContent<T>(data, _contentType));
