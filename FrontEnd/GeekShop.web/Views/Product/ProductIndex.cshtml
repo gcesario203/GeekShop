@@ -50,21 +50,23 @@
                     <td>
                         <div class="row text-center">
                             <div class="col px-0">
-                                <a asp-action="ProductEdit" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-outline-success">
+                                <a asp-action="ProductEdit" asp-controller="Product" asp-route-id="@item.Id"
+                                class="btn btn-outline-success">
                                     <span>
                                         Edit Item
                                     </span>
                                 </a>
                             </div>
-                            @if(User.IsInRole("Admin"))
+                            @if (User.IsInRole("Admin"))
                             {
-                                                            <div class="col px-0">
-                                <a asp-action="ProductDelete" asp-controller="Product" asp-route-id="@item.Id" class="btn btn-outline-danger">
-                                    <span>
-                                        Delete Item
-                                    </span>
-                                </a>
-                            </div>
+                                <div class="col px-0">
+                                    <a asp-action="ProductDelete" asp-controller="Product" asp-route-id="@item.Id"
+                                class="btn btn-outline-danger">
+                                        <span>
+                                            Delete Item
+                                        </span>
+                                    </a>
+                                </div>
                             }
                         </div>
                     </td>

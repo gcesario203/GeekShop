@@ -21,7 +21,6 @@ namespace Library.Controllers.Base
         }
 
         [HttpGet]
-        [Authorize]
         public virtual async Task<ActionResult<IEnumerable<V>>> FindAll()
         {
             var products = await _repository.FindAll();

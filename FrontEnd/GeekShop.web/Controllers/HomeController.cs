@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using GeekShop.web.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
+using GeekShop.web.Services;
 
 namespace GeekShop.web.Controllers;
 
@@ -10,14 +10,29 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
 
-    public HomeController(ILogger<HomeController> logger)
+    private readonly ProductService _service;
+
+    public HomeController(ILogger<HomeController> logger, ProductService service)
     {
         _logger = logger;
+
+        _service = service ?? throw new ArgumentException(nameof(service));
+    }
+    
+    [Authorize]
+    public async Task<IActionResult> Details(long id)
+    {
+        var product = await _service.FindById(id);
+
+        if (product == null) return NoContent();
+
+        return View(product);
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        var products = await _service.FindAll();
+        return View(products);
     }
 
     [Authorize]
