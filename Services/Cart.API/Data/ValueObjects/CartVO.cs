@@ -4,6 +4,6 @@ namespace Cart.API.Data.ValueObjects
     {
         public CartHeaderVO CartHeader { get; set; }
 
-        public IEnumerable<CartDetailVO> cardDetails { get; set; } = new List<CartDetailVO>();
+        public IEnumerable<CartDetailVO> CartDetails { get; set; } = new List<CartDetailVO>();
     }
 }

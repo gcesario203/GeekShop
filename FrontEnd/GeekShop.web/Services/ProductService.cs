@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GeekShop.web.Services
 {
-    public class ProductService : BaseService<ProductModel>
+    public class ProductService : BaseService<ProductViewModel>
     {
         public ProductService(HttpClient client, IHttpContextAccessor contextAccessor)
         : base(client, contextAccessor)

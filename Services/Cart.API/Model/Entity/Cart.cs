@@ -6,6 +6,6 @@ namespace Cart.API.Model.Entity
     {
         public CartHeader CartHeader { get; set; }
 
-        public IEnumerable<CartDetail> cardDetails { get; set; } = new List<CartDetail>();
+        public IEnumerable<CartDetail> CartDetails { get; set; } = new List<CartDetail>();
     }
 }

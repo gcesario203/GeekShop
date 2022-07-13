@@ -51,7 +51,7 @@ public class ProductController : Controller
 
     [Authorize(Roles = Role.Admin)]
     [HttpPost]
-    public async Task<IActionResult> ProductEdit(ProductModel model)
+    public async Task<IActionResult> ProductEdit(ProductViewModel model)
     {
         if (!ModelState.IsValid) return NoContent();
 
@@ -64,7 +64,7 @@ public class ProductController : Controller
 
     [Authorize(Roles = Role.Admin)]
     [HttpPost]
-    public async Task<IActionResult> ProductCreate(ProductModel model)
+    public async Task<IActionResult> ProductCreate(ProductViewModel model)
     {
         if (!ModelState.IsValid) return NoContent();
 

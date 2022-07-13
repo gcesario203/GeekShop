@@ -74,6 +74,8 @@ public class Index : PageModel
     public async Task<IActionResult> OnPost()
     {
         // check if we are in the context of an authorization request
+        Input.ReturnUrl = Input.ReturnUrl ?? "http://localhost:5080";
+        
         var context = await _interaction.GetAuthorizationContextAsync(Input.ReturnUrl);
 
         if(Input.Button == "register")
